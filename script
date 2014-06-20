@@ -1,0 +1,27 @@
+#####################
+# Distribución de votaciones por municipio según grado de afectación del conficto
+# Comparación votación por Santos y grado de participación
+# Datos: Registraduría (compilación de @infrahumano / https://github.com/finiterank) y CERAC (http://www.cerac.org.co/)
+#####################
+
+library(ggplot2)
+new<- read.csv("elecc.csv")
+
+#######
+# Comparación más afectados vs. sin conflicto
+######
+
+#Votación Santos
+ggplot(subset(new,Desc %in% c("F" , "A")), aes(Porcentaje.de.Votos.por.Santos, fill = Municipios)) +  geom_density(alpha = 0.2) + xlim(0, 1) + ggtitle("Votación por Santos en Municipios fuertemente y persistentemente afectados por conflicto vs. Municipios sin conflicto") + annotate("text", label = "Datos: CERAC & Registraduría", x = 0.15, y = -.1, size = 5, colour = "black")
+#Participación
+ggplot(subset(new,Desc %in% c("F" , "A")), aes(part, fill = Municipios)) +  geom_density(alpha = 0.2) + xlim(0, 1) + ggtitle("Participación electoral en Municipios fuertemente y persistentemente afectados por conflicto vs. Municipios sin conflicto") + annotate("text", label = "Datos: CERAC & Registraduría", x = 0.15, y = -.1, size = 5, colour = "black") +  labs(x = "Participación Electoral en el Municipio (% votantes potenciales)")
+
+
+########
+# Comparación todas categorías CERAC
+########
+
+#Votación Santos
+ggplot(subset(new,Desc %in% c("A", "E", "C", "F", "D")), aes(Porcentaje.de.Votos.por.Santos, fill = Municipios)) +  geom_density(alpha = 0.2) + xlim(0, 1) + ggtitle("Votación por Santos en Municipios fuertemente y persistentemente afectados por conflicto vs. Municipios sin conflicto") + annotate("text", label = "Datos: CERAC & Registraduría", x = 0.15, y = -.1, size = 5, colour = "black")
+#Participación
+ggplot(subset(new,Desc %in% c("A", "E", "C", "F", "D")), aes(part, fill = Municipios)) +  geom_density(alpha = 0.2) + xlim(0, 1) + ggtitle("Participación electoral en Municipios fuertemente y persistentemente afectados por conflicto vs. Municipios sin conflicto") + annotate("text", label = "Datos: CERAC & Registraduría", x = 0.15, y = -.1, size = 5, colour = "black")
